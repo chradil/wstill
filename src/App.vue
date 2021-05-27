@@ -1,8 +1,11 @@
 <template>
-  <div id="nav">
-    <router-link to="/">HOME</router-link> 
-    <router-link to="/map">MAP</router-link> 
-    <router-link to="/events">EVENTS</router-link>
+  <div class="topnav" id="nav">
+  
+    <router-link v-on:click="expand" class="icon" id="icon" to="/"><i class="fa fa-bars" ></i></router-link>
+    <router-link class="link" to="/">HOME</router-link> 
+    <router-link class="link" to="/map">MAP</router-link> 
+    <router-link class="link" to="/events">EVENTS</router-link>
+    
   </div>
   <router-view/>
 </template>
@@ -89,7 +92,64 @@ img {
 
 }
 
-</style>
+.icon {
+  display: none;
+}
 
+@media screen and (max-width: 700px) {
+  .topnav .link {display: none;}
+  .icon {
+    float: right;
+    display: block;
+    text-align:center;
+  }
+  .topnav .responsive {position: relative;}
+
+  .responsive .link{
+    float: none;
+    display: inline-block;
+    position:relative;
+    width:100%;
+  }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+  h1{
+    padding:1em;
+    font-size:3em;
+    color:rgb(209, 228, 221);
+
+  }
+
+}
+
+
+</style>
+<script>
+  export default {
+      methods: {
+          expand(){
+              console.log('clicked');
+              var x = document.getElementById("nav");
+              let y = document.getElementsByClassName("link");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+              for(let i=0;i<y.length;i++){
+                if (y[i].className === "link") {
+                console.log(y[i]);
+                  y[i].className += " responsive";
+                } else {
+                  y[i].className = "link";
+                }
+              }
+          }
+      }
+  };
+</script>
 
 
